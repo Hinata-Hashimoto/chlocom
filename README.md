@@ -1,2 +1,2 @@
 # chlocom
-ChloCom: an interactive chloroplast genome comparison tool
+ChloCom: an interactive chloroplast genome comparison viewer
