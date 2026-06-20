@@ -47,7 +47,7 @@ footer .ghlink { white-space: nowrap; }
 #statusbar { padding: 5px 20px; font-size: 12px; color: var(--text); background: #f3f6fb; border-bottom: 1px solid var(--line); }
 
 #viewer { position: relative; padding: 8px 20px 0; }
-#svg { width: 100%; height: 560px; display: block; cursor: grab; user-select: none; touch-action: none; }
+#svg { width: 100%; height: 380px; display: block; cursor: grab; user-select: none; touch-action: none; }
 #svg.dragging { cursor: grabbing; }
 
 .tooltip {

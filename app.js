@@ -24,8 +24,9 @@ const REGION_COLOR = { LSC: '#cfe2f3', SSC: '#fce5cd', IRa: '#d9ead3', IRb: '#d9
 const BASE_COLOR = { A: '#2e7d32', C: '#1565c0', G: '#ef6c00', T: '#c62828', U: '#c62828', N: '#999' };
 const COMP = { A: 'T', T: 'A', G: 'C', C: 'G', U: 'A', N: 'N' };
 
-const L = { ml: 196, mr: 24, topAxisY: 102, topSeqY: 122, topY: 142, geneH: 28,
-            botY: 388, botSeqY: 430, botAxisY: 452 };
+const L = { ml: 196, mr: 24, topAxisY: 28, topSeqY: 48, topY: 64, geneH: 28,
+            botY: 300, botSeqY: 342, botAxisY: 360 };
+const SVG_H = 380;             // SVG の高さ（上下の余白を詰めた）
 const SEQ_MIN_PX = 7;
 const shortName = d => d.replace(/\s*\(.*/, '').replace(/^(\w)\w+\s+/, '$1. ');
 
@@ -154,7 +155,7 @@ function ribbonPath(xt0, xt1, xb0, xb1, ytop, ybot) {
 function render() {
   computeLinks();
   while (svg.firstChild) svg.removeChild(svg.firstChild);
-  const W = svg.clientWidth, H = 560;
+  const W = svg.clientWidth, H = SVG_H;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const top = GENOME_DATA[state.top], bot = GENOME_DATA[state.bot];
   if (!top || !bot) return;
@@ -439,7 +440,7 @@ const SVG_CSS = `
 .base{font:600 12px ui-monospace,monospace}.selrect{fill:rgba(21,101,192,.16);stroke:#1565c0;stroke-width:1}
 .notemark{font:11px sans-serif;fill:#e65100}text{font-family:sans-serif}`;
 function saveScreenshot() {
-  const W = svg.clientWidth, H = 560, scale = 2;
+  const W = svg.clientWidth, H = SVG_H, scale = 2;
   const clone = svg.cloneNode(true);
   clone.setAttribute('xmlns', NS); clone.setAttribute('width', W); clone.setAttribute('height', H);
   const st = document.createElementNS(NS, 'style'); st.textContent = SVG_CSS; clone.insertBefore(st, clone.firstChild);
