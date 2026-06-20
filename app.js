@@ -577,9 +577,10 @@ function doSearch(q) {
 }
 function resetView() { state.span = 1; state.centerTop = state.centerBot = 0.5; state.pin = null; state.sel = null; updateSeqPanel(); }
 function updateThrUI() {
-  // しきい値は BLASTN シンテニー（blast モード時）と、種ごとの presence（常時）の両方に効くので常に有効
-  document.getElementById('thrWrap').classList.remove('off');
-  document.getElementById('minPid').disabled = false;
+  // スライダーは BLASTN モードのときだけ操作可（presence は最後に設定した値を使う）
+  const on = state.mode === 'blast';
+  document.getElementById('thrWrap').classList.toggle('off', !on);
+  document.getElementById('minPid').disabled = !on;
   document.getElementById('minPidVal').textContent = state.minPid + '%';
 }
 const nGenes = g => g.genes.reduce((n, x) => n + (x.cat !== 'intergenic' && !x.key.endsWith('__ir2')), 0);
