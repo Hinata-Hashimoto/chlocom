@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChloCom — chloroplast genome comparison viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>ChloCom <span class="sub">an interactive chloroplast genome comparison viewer</span></h1>
+  <p class="hint">Two chloroplast genomes are shown top and bottom; the same (homologous) genes are linked by ribbons
+     so you can compare their positions. Hover a gene to highlight its homolog. Scroll to zoom, drag to move.
+     <b>Click a gene</b> to align the other genome to its homolog and open the sequence panel. Zoom in far enough to see
+     the <b>DNA sequence</b>. <b>Shift-drag</b> over a track to grab the sequence of that range.</p>
+</header>
+
+<section class="controls">
+  <label>Top genome
+    <select id="topSelect"></select>
+  </label>
+  <label>Bottom genome
+    <select id="botSelect"></select>
+  </label>
+  <label class="search">Find gene
+    <input id="search" type="text" placeholder="e.g. rbcL, psaA, rrn16" list="geneList" autocomplete="off">
+    <datalist id="geneList"></datalist>
+  </label>
+  <label>Synteny by
+    <select id="mode">
+      <option value="name">gene name (simple)</option>
+      <option value="blast">BLASTN (strict)</option>
+    </select>
+  </label>
+  <label class="thr" id="thrWrap" title="BLASTN % identity threshold for homology — controls synteny ribbons (in BLASTN mode) and the per-species presence list. Lower bound = floor used when precomputing BLAST.">
+    identity ≥ <input id="minPid" type="range" min="30" max="100" step="1" value="50"><span id="minPidVal">50%</span>
+  </label>
+  <label class="chk"><input type="checkbox" id="onlyShared"> Shared genes only</label>
+  <label class="chk"><input type="checkbox" id="showLabels"> Always show gene names</label>
+  <label class="chk"><input type="checkbox" id="revcomp"> − strand (rev-comp)</label>
+  <label class="chk"><input type="checkbox" id="invSSC"> Invert SSC (bottom)</label>
+  <button id="swapBtn" title="Swap top and bottom">⇅ Swap</button>
+  <button id="resetBtn" title="Reset zoom">⟲ Fit</button>
+  <button id="rangeBtn" title="Download the DNA of the current view as FASTA">⤓ Export view</button>
+  <button id="shotBtn" title="Save a PNG screenshot of the current view">📷 Screenshot</button>
+  <button id="notesExport" title="Download all gene notes as a JSON file">⬇ Notes</button>
+  <button id="notesImport" title="Load gene notes from a JSON file (merges)">⬆ Notes</button>
+  <input type="file" id="notesFile" accept="application/json,.json" hidden>
+</section>
+
+<section class="legend" id="legend"></section>
+
+<div id="statusbar"><span id="status"></span></div>
+
+<div id="viewer">
+  <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div id="tooltip" class="tooltip" hidden></div>
+</div>
+
+<section id="geneInfo" class="geneinfo" hidden></section>
+
+<section class="extract">
+  <span class="title">Extract sequence</span>
+  <label>Genome <select id="rangeGenome"></select></label>
+  <label>Start (bp) <input id="rangeFrom" type="number" min="0" step="1" value="0"></label>
+  <label>Length (bp, downstream →) <input id="rangeLen" type="number" min="1" step="1" value="1000"></label>
+  <span id="rangeTo" class="muted"></span>
+  <button id="rangeGet">Get</button>
+  <button id="rangeCopy">Copy</button>
+  <button id="rangeDl">Download FASTA</button>
+  <span class="muted">— or Shift-drag over a genome track</span>
+  <div id="rangeOut" class="rangeout" hidden></div>
+</section>
+
+<section id="seqPanel" class="seqpanel" hidden></section>
+
+<footer>
+  <span class="muted">Coordinates are rotated so each genome starts at its LSC (position 0). Data built from GenBank by <code>generate_data.py</code>.
+  Hover a gene to highlight its homolog; click to align &amp; open the sequence panel (with a note field). Shift-drag a track to grab a range; click empty space to clear.</span>
+</footer>
+
+<script src="data/genomes.js"></script>
+<script src="data/sequences.js"></script>
+<script src="data/blast.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
