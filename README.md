@@ -1,4 +1,5 @@
 # ChloCom: interactive chloroplast genome comparison viewer
+https://hinata-hashimoto.github.io/chlocom/
 
 ChloCom shows two chloroplast genomes stacked top and bottom and links homologous
 genes with ribbons, so you can explore synteny, gene content, and sequence between
