@@ -95,22 +95,6 @@ generate_data.py    builds the data/*.js files
 docs/screenshot.png README image
 ```
 
-## Deploy to GitHub Pages
-
-It's a static site, so just publish the files and enable Pages:
-
-```bash
-touch .nojekyll
-git init && git add -A && git commit -m "ChloCom"
-git branch -M main
-gh repo create chlocom --public --source=. --push
-gh api -X POST repos/<user>/chlocom/pages -f source.branch=main -f source.path=/
-```
-
-…then open `https://<user>.github.io/chlocom/`. (Or upload the folder via the GitHub web UI
-and set *Settings → Pages → Deploy from a branch → main / root*.) `gb/` and `generate_data.py`
-are optional to include.
-
 ## Data sources & notes
 
 - Chloroplast sequences are NCBI RefSeq (accessions above); *N. benthamiana* uses a
