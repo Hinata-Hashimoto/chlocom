@@ -1,6 +1,4 @@
-# ChloCom: An interactive chloroplast genome comparison viewer.
-
-**An interactive chloroplast genome comparison viewer.**
+# ChloCom: interactive chloroplast genome comparison viewer
 
 ChloCom shows two chloroplast genomes stacked top and bottom and links homologous
 genes with ribbons, so you can explore synteny, gene content, and sequence between
