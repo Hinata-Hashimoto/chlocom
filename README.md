@@ -1,4 +1,4 @@
-# ChloCom
+# ChloCom: An interactive chloroplast genome comparison viewer.
 
 **An interactive chloroplast genome comparison viewer.**
 
